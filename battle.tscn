@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfkwhgiqxx7k7"]
+
+[ext_resource type="Texture2D" uid="uid://brsgmjf1qs40a" path="res://assets/sprites/battleback1.png" id="1_vc67p"]
+[ext_resource type="Script" path="res://Battle.cs" id="1_vrjpg"]
+[ext_resource type="Texture2D" uid="uid://b6xr83lbwpmm6" path="res://assets/sprites/enemies-removebg-preview.png" id="2_4hro4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrvy2"]
+atlas = ExtResource("2_4hro4")
+region = Rect2(112, 136, 56, 68)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tju3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vrvy2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="Battle" type="Node2D"]
+position = Vector2(247, 289)
+script = ExtResource("1_vrjpg")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(113.75, -50.625)
+scale = Vector2(0.652627, 0.768519)
+texture = ExtResource("1_vc67p")
+
+[node name="Snake" type="Node2D" parent="."]
+
+[node name="SnakeSprite" type="AnimatedSprite2D" parent="Snake"]
+position = Vector2(94, -42)
+sprite_frames = SubResource("SpriteFrames_tju3l")
+
+[node name="HealthLabel" type="Label" parent="Snake"]
+offset_left = 76.0
+offset_top = -102.0
+offset_right = 142.0
+offset_bottom = -75.0
+text = "30hp"
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -127.0
+offset_top = 118.0
+offset_right = 352.0
+offset_bottom = 186.0
+size_flags_vertical = 8
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="PlayerUI"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 19.0
+offset_right = 96.0
+offset_bottom = 51.0
+text = "Attack"
+metadata/_edit_use_anchors_ = true
