@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c8hullhagpt7b"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6fqh"]
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_muqrj"]
+bg_color = Color(0.521569, 0.0666667, 0.270588, 1)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r5mh6"]
+bg_color = Color(0.856019, 0.497394, 0.204357, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 3
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_selu4"]
+bg_color = Color(0.520994, 0.0678817, 0.271862, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_size = 2
+shadow_offset = Vector2(2, 2)
+
+[resource]
+Button/styles/disabled = SubResource("StyleBoxFlat_l6fqh")
+Button/styles/hover = SubResource("StyleBoxFlat_muqrj")
+Button/styles/normal = SubResource("StyleBoxFlat_r5mh6")
+Button/styles/pressed = SubResource("StyleBoxFlat_selu4")

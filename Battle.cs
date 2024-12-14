@@ -3,32 +3,52 @@ using System;
 
 public partial class Battle : Node2D
 {
-
 	private int _enemyHealth = 30;
 	private Label? _healthLabel;
 	
-	// Called when the node enters the scene tree for the first time.
+	
 	public override void _Ready()
 	{
-		_healthLabel = GetNode<Label>("HealthLabel");
+		_healthLabel = GetNode<Label>("Snake/HealthLabel");
+		UpdateHealthLabel();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+
 	public override void _Process(double delta)
 	{
+		
 	}
-	
-	
-	//
-	private void _onAttackButton()
+
+
+	private void _onAttackButtonPressed()
 	{
 		GD.Print("Attack!");
+		DecreaseEnemyHealth(10);
 	}
-	
-	//
+
+
+	private void DecreaseEnemyHealth(int damage)
+	{
+		_enemyHealth = Math.Max(0, _enemyHealth - damage);
+		UpdateHealthLabel();
+
+		if (_enemyHealth <= 0)
+		{
+			GD.Print("Enemy defeated!");
+		}
+	}
+
+
 	private void UpdateHealthLabel()
 	{
-		_healthLabel.Text = $"{_enemyHealth} hp";
+		if (_healthLabel != null)
+		{
+			_healthLabel.Text = $"{_enemyHealth} HP";
+		}
+		else
+		{
+			GD.PrintErr("HealthLabel node not found!");
+		}
 	}
 	
 }

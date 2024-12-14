@@ -1,22 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfkwhgiqxx7k7"]
+[gd_scene load_steps=8 format=3 uid="uid://bfkwhgiqxx7k7"]
 
 [ext_resource type="Texture2D" uid="uid://brsgmjf1qs40a" path="res://assets/sprites/battleback1.png" id="1_vc67p"]
 [ext_resource type="Script" path="res://Battle.cs" id="1_vrjpg"]
-[ext_resource type="Texture2D" uid="uid://b6xr83lbwpmm6" path="res://assets/sprites/enemies-removebg-preview.png" id="2_4hro4"]
+[ext_resource type="Texture2D" uid="uid://cktrhteam3b06" path="res://assets/sprites/enemies/Monsters2.png" id="3_ljfes"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vrvy2"]
-atlas = ExtResource("2_4hro4")
-region = Rect2(112, 136, 56, 68)
+[sub_resource type="AtlasTexture" id="AtlasTexture_otqor"]
+atlas = ExtResource("3_ljfes")
+region = Rect2(0, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_folhg"]
+atlas = ExtResource("3_ljfes")
+region = Rect2(96, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a23ga"]
+atlas = ExtResource("3_ljfes")
+region = Rect2(192, 288, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tju3l"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vrvy2")
+"texture": SubResource("AtlasTexture_otqor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_folhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a23ga")
 }],
 "loop": true,
-"name": &"default",
-"speed": 1.0
+"name": &"Idle",
+"speed": 4.0
 }]
 
 [node name="Battle" type="Node2D"]
@@ -24,22 +38,27 @@ position = Vector2(247, 289)
 script = ExtResource("1_vrjpg")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(113.75, -50.625)
-scale = Vector2(0.652627, 0.768519)
+position = Vector2(113.25, -48.6251)
+scale = Vector2(0.651721, 0.77496)
 texture = ExtResource("1_vc67p")
 
 [node name="Snake" type="Node2D" parent="."]
 
-[node name="SnakeSprite" type="AnimatedSprite2D" parent="Snake"]
-position = Vector2(94, -42)
+[node name="SlimeSprite" type="AnimatedSprite2D" parent="Snake"]
+position = Vector2(101, -48)
+scale = Vector2(1.44643, 1.41176)
 sprite_frames = SubResource("SpriteFrames_tju3l")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.199628
 
 [node name="HealthLabel" type="Label" parent="Snake"]
-offset_left = 76.0
-offset_top = -102.0
-offset_right = 142.0
-offset_bottom = -75.0
+offset_left = 69.0
+offset_top = -116.0
+offset_right = 135.0
+offset_bottom = -89.0
 text = "30hp"
+horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerUI" type="Control" parent="."]
@@ -52,11 +71,16 @@ offset_bottom = 186.0
 size_flags_vertical = 8
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="PlayerUI"]
-layout_mode = 0
+[node name="AttackButton" type="Button" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.176471
+anchor_right = 0.0584551
 offset_left = 33.0
 offset_top = 19.0
 offset_right = 96.0
 offset_bottom = 51.0
-text = "Attack"
+text = "ATACAR"
 metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="PlayerUI/AttackButton" to="." method="_onAttackButtonPressed"]
