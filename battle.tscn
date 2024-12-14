@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bfkwhgiqxx7k7"]
+[gd_scene load_steps=9 format=3 uid="uid://bfkwhgiqxx7k7"]
 
 [ext_resource type="Texture2D" uid="uid://brsgmjf1qs40a" path="res://assets/sprites/battleback1.png" id="1_vc67p"]
 [ext_resource type="Script" path="res://Battle.cs" id="1_vrjpg"]
+[ext_resource type="Script" path="res://Slime.cs" id="3_0rkrl"]
 [ext_resource type="Texture2D" uid="uid://cktrhteam3b06" path="res://assets/sprites/enemies/Monsters2.png" id="3_ljfes"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otqor"]
@@ -42,9 +43,10 @@ position = Vector2(113.25, -48.6251)
 scale = Vector2(0.651721, 0.77496)
 texture = ExtResource("1_vc67p")
 
-[node name="Snake" type="Node2D" parent="."]
+[node name="Slime" type="Node2D" parent="."]
+script = ExtResource("3_0rkrl")
 
-[node name="SlimeSprite" type="AnimatedSprite2D" parent="Snake"]
+[node name="SlimeSprite" type="AnimatedSprite2D" parent="Slime"]
 position = Vector2(101, -48)
 scale = Vector2(1.44643, 1.41176)
 sprite_frames = SubResource("SpriteFrames_tju3l")
@@ -52,34 +54,33 @@ animation = &"Idle"
 autoplay = "Idle"
 frame_progress = 0.199628
 
-[node name="HealthLabel" type="Label" parent="Snake"]
+[node name="HealthLabel" type="Label" parent="Slime"]
 offset_left = 69.0
 offset_top = -116.0
 offset_right = 135.0
 offset_bottom = -89.0
-text = "30hp"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -127.0
-offset_top = 118.0
-offset_right = 352.0
-offset_bottom = 186.0
-size_flags_vertical = 8
-metadata/_edit_use_anchors_ = true
+offset_left = -246.0
+offset_top = 47.0
+offset_right = 471.0
+offset_bottom = 190.0
 
 [node name="AttackButton" type="Button" parent="PlayerUI"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = -0.176471
-anchor_right = 0.0584551
-offset_left = 33.0
-offset_top = 19.0
-offset_right = 96.0
-offset_bottom = 51.0
+anchor_left = 0.219419
+anchor_top = -1.94241
+anchor_right = 0.271023
+anchor_bottom = -1.74481
+offset_left = 388.676
+offset_top = 318.765
+offset_right = 453.676
+offset_bottom = 350.765
 text = "ATACAR"
 metadata/_edit_use_anchors_ = true
 

@@ -3,52 +3,31 @@ using System;
 
 public partial class Battle : Node2D
 {
-	private int _enemyHealth = 30;
-	private Label? _healthLabel;
-	
+	private Slime? _enemy;
+
 	
 	public override void _Ready()
 	{
-		_healthLabel = GetNode<Label>("Snake/HealthLabel");
-		UpdateHealthLabel();
-	}
-
-
-	public override void _Process(double delta)
-	{
-		
-	}
-
-
-	private void _onAttackButtonPressed()
-	{
-		GD.Print("Attack!");
-		DecreaseEnemyHealth(10);
-	}
-
-
-	private void DecreaseEnemyHealth(int damage)
-	{
-		_enemyHealth = Math.Max(0, _enemyHealth - damage);
-		UpdateHealthLabel();
-
-		if (_enemyHealth <= 0)
+		_enemy = GetNodeOrNull<Slime>("Slime");
+		if (_enemy == null)
 		{
-			GD.Print("Enemy defeated!");
+			GD.PrintErr("Slime node not found!");
 		}
 	}
-
-
-	private void UpdateHealthLabel()
+	
+	
+	private void _onAttackButtonPressed()
 	{
-		if (_healthLabel != null)
+		if (_enemy != null)
 		{
-			_healthLabel.Text = $"{_enemyHealth} HP";
+			_enemy.ReceiveDamage(4);
+			_enemy.UpdateHealthLabel();
 		}
 		else
 		{
-			GD.PrintErr("HealthLabel node not found!");
+			GD.PrintErr("No enemy to attack!");
 		}
+
 	}
 	
 }
