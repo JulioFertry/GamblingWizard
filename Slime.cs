@@ -6,8 +6,10 @@ public partial class Slime : Node2D
 {
 
 	private int _health;
+	private int _damage;
 	public string MonsterName { get; set; } = "Slime";
-	private Label? HealthLabel { get; set; }
+	private Label HealthLabel { get; set; }
+	private AnimationPlayer Animations { get; set; }
 
 	public int Health
 	{
@@ -19,6 +21,7 @@ public partial class Slime : Node2D
 			if (_health <= 0)
 			{
 				GD.Print($"{MonsterName} ha muerto!");
+				Die();
 			}
 		}
 	}
@@ -27,6 +30,7 @@ public partial class Slime : Node2D
 	public override void _Ready()
 	{
 		HealthLabel = GetNode<Label>("HealthLabel");
+		Animations = GetNode<AnimationPlayer>("AnimationPlayer");
 		Random random = new Random();
 		this._health = random.Next(15, 46);
 		this.Health = this._health;
@@ -44,12 +48,20 @@ public partial class Slime : Node2D
 	}
 
 
-	public void ReceiveDamage(int damage)
+	public void Die()
 	{
-		GD.Print($"{Name} recibe {damage} de daño");
-		Health -= damage;
+		QueueFree();
 	}
 
-	
 
+	public void ReceiveDamage(int damage)
+	{
+		if (_health > 0)
+		{
+			GD.Print($"{Name} recibe {damage} de daño");
+			Animations.Play("shake");
+			Health -= damage;
+		}
+	}
+	
 }

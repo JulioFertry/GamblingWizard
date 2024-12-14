@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://cpbquaowss5bt"]
+
+[ext_resource type="Script" path="res://Slime.cs" id="1_7thxj"]
+[ext_resource type="Texture2D" uid="uid://cktrhteam3b06" path="res://assets/sprites/enemies/Monsters2.png" id="2_ltq3k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_otqor"]
+atlas = ExtResource("2_ltq3k")
+region = Rect2(0, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_folhg"]
+atlas = ExtResource("2_ltq3k")
+region = Rect2(96, 288, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a23ga"]
+atlas = ExtResource("2_ltq3k")
+region = Rect2(192, 288, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tju3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_otqor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_folhg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a23ga")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 4.0
+}]
+
+[sub_resource type="Animation" id="Animation_2exob"]
+resource_name = "shake"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(101, -48), Vector2(115, -37), Vector2(102, -38), Vector2(120, -49), Vector2(98, -49), Vector2(108, -31), Vector2(94, -40), Vector2(121, -41), Vector2(101, -48)]
+}
+
+[sub_resource type="Animation" id="Animation_i4pga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SlimeSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(101, -48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p58xs"]
+_data = {
+"RESET": SubResource("Animation_i4pga"),
+"shake": SubResource("Animation_2exob")
+}
+
+[node name="Slime" type="Node2D"]
+position = Vector2(-104, 38)
+script = ExtResource("1_7thxj")
+
+[node name="SlimeSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(101, -48)
+scale = Vector2(1.44643, 1.41176)
+sprite_frames = SubResource("SpriteFrames_tju3l")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = 69.0
+offset_top = -116.0
+offset_right = 135.0
+offset_bottom = -89.0
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p58xs")
+}
