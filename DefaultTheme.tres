@@ -1,4 +1,6 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c8hullhagpt7b"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c8hullhagpt7b"]
+
+[ext_resource type="Texture2D" uid="uid://dneu2l3g5axc0" path="res://assets/sprites/GUI/Wooden Planks (51).png" id="1_5occu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6fqh"]
 corner_radius_top_left = 8
@@ -36,8 +38,12 @@ corner_radius_bottom_left = 8
 shadow_size = 2
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qwmv8"]
+texture = ExtResource("1_5occu")
+
 [resource]
 Button/styles/disabled = SubResource("StyleBoxFlat_l6fqh")
 Button/styles/hover = SubResource("StyleBoxFlat_muqrj")
 Button/styles/normal = SubResource("StyleBoxFlat_r5mh6")
 Button/styles/pressed = SubResource("StyleBoxFlat_selu4")
+Panel/styles/panel = SubResource("StyleBoxTexture_qwmv8")

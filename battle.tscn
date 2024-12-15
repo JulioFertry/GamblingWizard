@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfkwhgiqxx7k7"]
+[gd_scene load_steps=5 format=3 uid="uid://bfkwhgiqxx7k7"]
 
 [ext_resource type="Texture2D" uid="uid://brsgmjf1qs40a" path="res://assets/sprites/battleback1.png" id="1_vc67p"]
 [ext_resource type="Script" path="res://Battle.cs" id="1_vrjpg"]
 [ext_resource type="PackedScene" uid="uid://cpbquaowss5bt" path="res://scenes/slime.tscn" id="3_inmoh"]
+[ext_resource type="Script" path="res://Player.cs" id="3_yj335"]
 
 [node name="Battle" type="Node2D"]
 position = Vector2(247, 289)
@@ -13,45 +14,83 @@ position = Vector2(113.25, -48.6251)
 scale = Vector2(0.651721, 0.77496)
 texture = ExtResource("1_vc67p")
 
-[node name="Slime" parent="." instance=ExtResource("3_inmoh")]
-position = Vector2(-5, 12)
+[node name="Player" type="Node" parent="."]
+script = ExtResource("3_yj335")
 
-[node name="PlayerUI" type="Control" parent="."]
+[node name="PlayerUI" type="Control" parent="Player"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = -246.0
-offset_top = -289.0
-offset_right = 473.0
-offset_bottom = 191.0
+offset_left = 1.0
+offset_right = 720.0
+offset_bottom = 480.0
 
-[node name="PlayerStats" type="Panel" parent="PlayerUI"]
+[node name="PlayerStats" type="Panel" parent="Player/PlayerUI"]
 layout_mode = 0
-offset_left = 259.0
-offset_top = 370.0
-offset_right = 445.0
-offset_bottom = 464.0
+offset_left = -1.0
+offset_top = 351.0
+offset_right = 243.0
+offset_bottom = 481.0
 
-[node name="AttackButton" type="Button" parent="PlayerUI"]
+[node name="StatsContainer" type="VBoxContainer" parent="Player/PlayerUI/PlayerStats"]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 16.0
+offset_right = 226.0
+offset_bottom = 115.0
+
+[node name="PlayerNameLabel" type="Label" parent="Player/PlayerUI/PlayerStats/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 24
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerHpLabel" type="Label" parent="Player/PlayerUI/PlayerStats/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerDmgLabel" type="Label" parent="Player/PlayerUI/PlayerStats/StatsContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Actions" type="Panel" parent="Player/PlayerUI"]
+layout_mode = 0
+offset_left = 243.0
+offset_top = 351.0
+offset_right = 474.0
+offset_bottom = 481.0
+
+[node name="AttackButton" type="Button" parent="Player/PlayerUI/Actions"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.181762
-anchor_top = 0.16158
-anchor_right = 0.250103
-anchor_bottom = 0.180409
-offset_left = 388.676
-offset_top = 318.765
-offset_right = 453.676
-offset_bottom = 350.765
+anchor_left = -0.134959
+anchor_top = 0.0898614
+anchor_right = 0.1724
+anchor_bottom = 0.282169
+offset_left = 83.1756
+offset_top = 24.318
+offset_right = 148.176
+offset_bottom = 56.318
+theme_override_font_sizes/font_size = 30
 text = "ATACAR"
 metadata/_edit_use_anchors_ = true
 
-[node name="ConsoleMessages" type="Panel" parent="PlayerUI"]
+[node name="ConsoleMessages" type="Panel" parent="Player/PlayerUI"]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 370.0
-offset_right = 208.0
-offset_bottom = 464.0
+offset_left = 474.0
+offset_top = 351.0
+offset_right = 720.0
+offset_bottom = 481.0
 
-[connection signal="pressed" from="PlayerUI/AttackButton" to="." method="_onAttackButtonPressed"]
+[node name="Slime" parent="." instance=ExtResource("3_inmoh")]
+position = Vector2(-5, 12)
+
+[connection signal="pressed" from="Player/PlayerUI/Actions/AttackButton" to="." method="_onAttackButtonPressed"]
 
 [editable path="Slime"]

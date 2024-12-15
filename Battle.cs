@@ -3,7 +3,7 @@ using System;
 
 public partial class Battle : Node2D
 {
-	private Slime? _enemy;
+	private Slime _enemy;
 
 	
 	public override void _Ready()
