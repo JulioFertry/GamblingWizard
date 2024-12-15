@@ -1,6 +1,5 @@
-using System.Threading.Tasks;
-
 namespace GamblingWizard;
+using System.Threading.Tasks;
 using Godot;
 using System;
 

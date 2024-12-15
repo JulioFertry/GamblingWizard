@@ -1,6 +1,6 @@
+namespace GamblingWizard;
 using System.Threading.Tasks;
 
-namespace GamblingWizard;
 
 public interface IEnemy
 {
