@@ -1,4 +1,4 @@
-namespace GamblingWizard;
+namespace GamblingWizard.scenes;
 using System.Threading.Tasks;
 using Godot;
 using System;
@@ -6,6 +6,9 @@ using System;
 
 public partial class Slime : Node2D, IEnemy
 {
+	[Signal]
+	public delegate void EnemyDiedEventHandler();
+	
 	private int _health;
 	private int _damage;
 	public string MonsterName { get; } = "Slime";
@@ -88,6 +91,7 @@ public partial class Slime : Node2D, IEnemy
 
 	public void Die()
 	{
+		EmitSignal(nameof(EnemyDied));
 		QueueFree();
 	}
 	

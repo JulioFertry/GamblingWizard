@@ -1,6 +1,5 @@
-namespace GamblingWizard;
+namespace GamblingWizard.scenes;
 using Godot;
-using System;
 
 
 public partial class Slash : Node2D

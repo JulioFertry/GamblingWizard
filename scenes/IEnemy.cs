@@ -1,4 +1,4 @@
-namespace GamblingWizard;
+namespace GamblingWizard.scenes;
 using System.Threading.Tasks;
 
 

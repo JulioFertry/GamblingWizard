@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfkwhgiqxx7k7"]
+[gd_scene load_steps=4 format=3 uid="uid://bfkwhgiqxx7k7"]
 
 [ext_resource type="Texture2D" uid="uid://brsgmjf1qs40a" path="res://assets/sprites/battleback1.png" id="1_vc67p"]
 [ext_resource type="Script" path="res://Battle.cs" id="1_vrjpg"]
-[ext_resource type="PackedScene" uid="uid://cpbquaowss5bt" path="res://scenes/slime.tscn" id="3_inmoh"]
 [ext_resource type="Script" path="res://Player.cs" id="3_yj335"]
 
 [node name="Battle" type="Node2D"]
@@ -88,13 +87,4 @@ offset_top = 351.0
 offset_right = 720.0
 offset_bottom = 481.0
 
-[node name="Slime" parent="." instance=ExtResource("3_inmoh")]
-position = Vector2(3, -18)
-
-[node name="HealthLabel" parent="Slime" index="1"]
-offset_bottom = -86.0
-theme_override_font_sizes/font_size = 20
-
 [connection signal="pressed" from="Player/PlayerUI/Actions/AttackButton" to="." method="_onAttackButtonPressed"]
-
-[editable path="Slime"]

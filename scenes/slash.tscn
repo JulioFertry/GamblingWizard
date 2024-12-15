@@ -1,7 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1ot7n7ouhtly"]
+[gd_scene load_steps=6 format=3 uid="uid://bue3vexa6mloi"]
 
-[ext_resource type="Script" path="res://Slash.cs" id="1_awrph"]
-[ext_resource type="Texture2D" uid="uid://d1j1n0osqmc6n" path="res://assets/sprites/SlashEffect.png" id="2_4na3w"]
+[ext_resource type="Script" path="res://scenes/Slash.cs" id="1_wheol"]
+[ext_resource type="Texture2D" uid="uid://d1j1n0osqmc6n" path="res://assets/sprites/SlashEffect.png" id="2_lycpv"]
+
+[sub_resource type="Animation" id="Animation_5reko"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_rmryc"]
 resource_name = "slashAnimation"
@@ -20,21 +35,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="Animation" id="Animation_5reko"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7v7ei"]
 _data = {
 "RESET": SubResource("Animation_5reko"),
@@ -42,10 +42,10 @@ _data = {
 }
 
 [node name="Slash" type="Node2D"]
-script = ExtResource("1_awrph")
+script = ExtResource("1_wheol")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_4na3w")
+texture = ExtResource("2_lycpv")
 hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

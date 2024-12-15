@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://cpbquaowss5bt"]
+[gd_scene load_steps=11 format=3 uid="uid://dvq6tkb1ea6og"]
 
-[ext_resource type="Script" path="res://Slime.cs" id="1_7thxj"]
+[ext_resource type="Script" path="res://scenes/Slime.cs" id="1_7thxj"]
 [ext_resource type="Texture2D" uid="uid://cktrhteam3b06" path="res://assets/sprites/enemies/Monsters2.png" id="2_ltq3k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_otqor"]
@@ -15,7 +15,7 @@ region = Rect2(96, 288, 96, 96)
 atlas = ExtResource("2_ltq3k")
 region = Rect2(192, 288, 96, 96)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_tju3l"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_6lobw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -113,21 +113,21 @@ _data = {
 }
 
 [node name="Slime" type="Node2D"]
-position = Vector2(-104, 38)
 script = ExtResource("1_7thxj")
 
 [node name="SlimeSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(101, -48)
 scale = Vector2(1.44643, 1.41176)
-sprite_frames = SubResource("SpriteFrames_tju3l")
+sprite_frames = SubResource("SpriteFrames_6lobw")
 animation = &"Idle"
 autoplay = "Idle"
 
 [node name="HealthLabel" type="Label" parent="."]
-offset_left = 69.0
-offset_top = -116.0
-offset_right = 135.0
-offset_bottom = -89.0
+offset_left = -27.0
+offset_top = -76.0
+offset_right = 39.0
+offset_bottom = -46.0
+theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
