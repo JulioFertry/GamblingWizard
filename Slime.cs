@@ -1,8 +1,9 @@
+namespace GamblingWizard;
 using Godot;
 using System;
 
 
-public partial class Slime : Node2D
+public partial class Slime : Node2D, IEnemy
 {
 
 	private int _health;
@@ -34,6 +35,7 @@ public partial class Slime : Node2D
 		Random random = new Random();
 		this._health = random.Next(15, 46);
 		this.Health = this._health;
+		this._damage = random.Next(2, 8);
 		GD.Print($"Un {this.MonsterName} con {this.Health} puntos de vida ha aparecido!");
 		UpdateHealthLabel();
 	}
@@ -46,14 +48,19 @@ public partial class Slime : Node2D
 			HealthLabel.Text = $"{this._health} hp";
 		}
 	}
-
-
-	public void Die()
+	
+	
+	public void Attack(Player player)
 	{
-		QueueFree();
+		if (_health > 0)
+		{
+			GD.Print($"{MonsterName} ataca a {player.PlayerName} causando {_damage} puntos de daño");
+			Animations?.Play("attack");
+			player.ReceiveDamage(_damage);
+		}
 	}
-
-
+	
+	
 	public void ReceiveDamage(int damage)
 	{
 		if (_health > 0)
@@ -62,6 +69,12 @@ public partial class Slime : Node2D
 			Animations.Play("shake");
 			Health -= damage;
 		}
+	}
+
+
+	public void Die()
+	{
+		QueueFree();
 	}
 	
 }

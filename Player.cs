@@ -1,5 +1,7 @@
+namespace GamblingWizard;
 using Godot;
 using System;
+
 
 public partial class Player : Node
 {
@@ -36,6 +38,7 @@ public partial class Player : Node
 	private Label PlayerHealthLabel { get; set; }
 	private Label PlayerNameLabel { get; set; }
 	private Label PlayerDamageLabel { get; set; }
+	private IEnemy _target;
 
 
 	public override void _Ready()
@@ -67,12 +70,31 @@ public partial class Player : Node
 	}
 	
 	
+	public void SetTarget(IEnemy target)
+	{
+		_target = target;
+	}
+	
+	
+	private void _onAttackButtonPressed()
+	{
+		if (_target != null)
+		{
+			GD.Print($"{PlayerName} attacks {_target.MonsterName}");
+			_target.ReceiveDamage(4);
+		}
+		else
+		{
+			GD.PrintErr("No enemy to attack!");
+		}
+	}
+	
+	
 	public void ReceiveDamage(int damage)
 	{
 		if (Health > 0)
 		{
 			Health -= damage;
-			GD.Print($"{PlayerName} recibe {damage} puntos de daño");
 		}
 	}
 	
