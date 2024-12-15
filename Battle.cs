@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace GamblingWizard;
 using Godot;
 using System;
@@ -10,7 +12,6 @@ public partial class Battle : Node2D
 
 	private bool _isPlayerTurn = true;
 	
-
 	
 	public override void _Ready()
 	{
@@ -39,12 +40,12 @@ public partial class Battle : Node2D
 	}
 	
 	
-	private void _onPlayerAttack()
+	private async void _onPlayerAttack()
 	{
 		if (_isPlayerTurn)
 		{
 			_isPlayerTurn = false;
-			StartEnemyTurn();
+			await StartEnemyTurn();
 		}
 		else
 		{
@@ -53,11 +54,11 @@ public partial class Battle : Node2D
 	}
 	
 	
-	private void _onEnemyAttack()
+	private async void _onEnemyAttack()
 	{
 		if (_enemy != null && _player != null)
 		{
-			_enemy.Attack();
+			await _enemy.Attack();
 		}
 	}
 	
@@ -65,17 +66,20 @@ public partial class Battle : Node2D
 	private void EndEnemyTurn()
 	{
 		_isPlayerTurn = true;
+		_player.SetAttackButtonState(true);
 	}
 	
 	
-	private async void StartEnemyTurn()
+	private async Task StartEnemyTurn()
 	{
+		
 		if (_enemy != null && _player != null)
 		{
 			await ToSignal(GetTree().CreateTimer(1.0f), "timeout");
-			_enemy.Attack();
-			EndEnemyTurn();
+			await _enemy.Attack();
 		}
+		
+		EndEnemyTurn();
 	}
 	
 }

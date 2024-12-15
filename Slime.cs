@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace GamblingWizard;
 using Godot;
 using System;
@@ -7,7 +9,7 @@ public partial class Slime : Node2D, IEnemy
 {
 	private int _health;
 	private int _damage;
-	public string MonsterName { get; set; } = "Slime";
+	public string MonsterName { get; } = "Slime";
 	private Label HealthLabel { get; set; }
 	private AnimationPlayer Animations { get; set; }
 
@@ -42,7 +44,7 @@ public partial class Slime : Node2D, IEnemy
 	}
 
 
-	public void UpdateHealthLabel()
+	private void UpdateHealthLabel()
 	{
 		if (HealthLabel != null)
 		{
@@ -57,23 +59,29 @@ public partial class Slime : Node2D, IEnemy
 	}
 	
 	
-	public void Attack()
+	public async Task Attack()
 	{
-		if (_health > 0)
+		if (_health > 0 && Animations!= null)
 		{
 			GD.Print($"{MonsterName} ataca a {_target.PlayerName} causando {_damage} puntos de daño");
-			Animations?.Play("attack");
+			Animations.Play("attack");
+			await ToSignal(Animations, "animation_finished");
 			_target.ReceiveDamage(_damage);
+		}
+		else
+		{ 
+			GD.PrintErr("Animations not found!");
 		}
 	}
 	
 	
-	public void ReceiveDamage(int damage)
+	public async Task ReceiveDamage(int damage)
 	{
 		if (_health > 0)
 		{
 			GD.Print($"{Name} recibe {damage} de daño");
 			Animations.Play("shake");
+			await ToSignal(Animations, "animation_finished");
 			Health -= damage;
 		}
 	}

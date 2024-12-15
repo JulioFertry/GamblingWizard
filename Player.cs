@@ -8,11 +8,11 @@ public partial class Player : Node
 	[Signal]
 	public delegate void PlayerAttackedEventHandler();
 	
-	public string PlayerName { get; set; } = "Kiko";
+	public string PlayerName { get; } = "Kiko";
 	private int _maxHealth = 100;
 	private int _currentHealth;
 
-	public int Health
+	private int Health
 	{
 		get => _currentHealth;
 		set
@@ -28,7 +28,7 @@ public partial class Player : Node
 
 	private int _damage = 4;
 
-	public int Power
+	private int Power
 	{
 		get => _damage;
 		set
@@ -42,14 +42,15 @@ public partial class Player : Node
 	private Label PlayerNameLabel { get; set; }
 	private Label PlayerDamageLabel { get; set; }
 	private IEnemy _target;
+	private Button _attackButton;
 
 
 	public override void _Ready()
 	{
-		Button attackButton = GetNodeOrNull<Button>("PlayerUI/Actions/AttackButton");
-		if (attackButton != null)
+		_attackButton = GetNodeOrNull<Button>("PlayerUI/Actions/AttackButton");
+		if (_attackButton != null)
 		{
-			attackButton.Pressed += _onAttackButtonPressed;
+			_attackButton.Pressed += _onAttackButtonPressed;
 		}
 		
 		_currentHealth = _maxHealth;
@@ -85,8 +86,19 @@ public partial class Player : Node
 	}
 	
 	
+	public void SetAttackButtonState(bool enabled)
+	{
+		if (_attackButton != null)
+		{
+			_attackButton.Disabled = !enabled;
+		}
+	}
+	
+	
 	private void _onAttackButtonPressed()
 	{
+		SetAttackButtonState(false);
+		
 		if (_target != null)
 		{
 			GD.Print($"{PlayerName} ataca a {_target.MonsterName}");
@@ -109,7 +121,7 @@ public partial class Player : Node
 	}
 	
 	
-	public void Die()
+	private void Die()
 	{
 		GD.Print($"Has muerto, {PlayerName}");
 		GetTree().Quit();
