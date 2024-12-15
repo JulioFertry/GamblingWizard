@@ -5,6 +5,9 @@ using System;
 
 public partial class Player : Node
 {
+	[Signal]
+	public delegate void PlayerAttackedEventHandler();
+	
 	public string PlayerName { get; set; } = "Kiko";
 	private int _maxHealth = 100;
 	private int _currentHealth;
@@ -43,6 +46,12 @@ public partial class Player : Node
 
 	public override void _Ready()
 	{
+		Button attackButton = GetNodeOrNull<Button>("PlayerUI/Actions/AttackButton");
+		if (attackButton != null)
+		{
+			attackButton.Pressed += _onAttackButtonPressed;
+		}
+		
 		_currentHealth = _maxHealth;
 		
 		PlayerHealthLabel = GetNodeOrNull<Label>("PlayerUI/PlayerStats/StatsContainer/PlayerHpLabel");
@@ -80,8 +89,9 @@ public partial class Player : Node
 	{
 		if (_target != null)
 		{
-			GD.Print($"{PlayerName} attacks {_target.MonsterName}");
-			_target.ReceiveDamage(4);
+			GD.Print($"{PlayerName} ataca a {_target.MonsterName}");
+			_target.ReceiveDamage(_damage);
+			EmitSignal(nameof(PlayerAttacked));
 		}
 		else
 		{

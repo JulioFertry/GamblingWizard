@@ -5,7 +5,6 @@ using System;
 
 public partial class Slime : Node2D, IEnemy
 {
-
 	private int _health;
 	private int _damage;
 	public string MonsterName { get; set; } = "Slime";
@@ -26,6 +25,8 @@ public partial class Slime : Node2D, IEnemy
 			}
 		}
 	}
+	
+	private Player _target;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -50,13 +51,19 @@ public partial class Slime : Node2D, IEnemy
 	}
 	
 	
-	public void Attack(Player player)
+	public void SetTarget(Player player)
+	{
+		_target = player;
+	}
+	
+	
+	public void Attack()
 	{
 		if (_health > 0)
 		{
-			GD.Print($"{MonsterName} ataca a {player.PlayerName} causando {_damage} puntos de daño");
+			GD.Print($"{MonsterName} ataca a {_target.PlayerName} causando {_damage} puntos de daño");
 			Animations?.Play("attack");
-			player.ReceiveDamage(_damage);
+			_target.ReceiveDamage(_damage);
 		}
 	}
 	
