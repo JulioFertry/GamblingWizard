@@ -10,7 +10,7 @@ public partial class Player : Node
 	[Signal]
 	public delegate void PlayerAttackedEventHandler();
 
-	public string PlayerName { get; } = "Kiko";
+	public string PlayerName { get; } = "Player";
 	private int _maxHealth = 100;
 	private int _currentHealth;
 
@@ -28,7 +28,7 @@ public partial class Player : Node
 		}
 	}
 
-	private int _damage = 4;
+	private int _damage = 7;
 
 	private int Power
 	{
