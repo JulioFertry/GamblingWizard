@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfkwhgiqxx7k7"]
+[gd_scene load_steps=7 format=3 uid="uid://bfkwhgiqxx7k7"]
 
 [ext_resource type="Texture2D" uid="uid://brsgmjf1qs40a" path="res://assets/sprites/battleback1.png" id="1_vc67p"]
 [ext_resource type="Script" path="res://Battle.cs" id="1_vrjpg"]
 [ext_resource type="Script" path="res://Player.cs" id="3_yj335"]
+[ext_resource type="AudioStream" uid="uid://b6ul03jw73ou0" path="res://assets/audio/AttackSound.wav" id="4_7k1ih"]
+[ext_resource type="AudioStream" uid="uid://ui3qeiuomtwp" path="res://assets/audio/8bit Snakes.wav" id="4_8sq2t"]
+[ext_resource type="AudioStream" uid="uid://cqpc6ffutqbim" path="res://assets/audio/damaged.wav" id="5_8oqyj"]
 
 [node name="Battle" type="Node2D"]
 position = Vector2(247, 289)
@@ -86,5 +89,18 @@ offset_left = 474.0
 offset_top = 351.0
 offset_right = 720.0
 offset_bottom = 481.0
+
+[node name="AttackAudio" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("4_7k1ih")
+volume_db = 10.0
+
+[node name="DamagedAudio" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("5_8oqyj")
+volume_db = 5.0
+
+[node name="Snakes" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_8sq2t")
+volume_db = -15.0
+autoplay = true
 
 [connection signal="pressed" from="Player/PlayerUI/Actions/AttackButton" to="." method="_onAttackButtonPressed"]

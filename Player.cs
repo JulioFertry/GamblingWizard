@@ -43,6 +43,8 @@ public partial class Player : Node
 	private Label PlayerHealthLabel { get; set; }
 	private Label PlayerNameLabel { get; set; }
 	private Label PlayerDamageLabel { get; set; }
+	private AudioStreamPlayer2D _attackAudio;
+	private AudioStreamPlayer2D _damagedAudio;
 	private IEnemy _target;
 	private Button _attackButton;
 
@@ -60,6 +62,8 @@ public partial class Player : Node
 		PlayerHealthLabel = GetNodeOrNull<Label>("PlayerUI/PlayerStats/StatsContainer/PlayerHpLabel");
 		PlayerNameLabel = GetNodeOrNull<Label>("PlayerUI/PlayerStats/StatsContainer/PlayerNameLabel");
 		PlayerDamageLabel = GetNodeOrNull<Label>("PlayerUI/PlayerStats/StatsContainer/PlayerDmgLabel");
+		_attackAudio = GetNodeOrNull<AudioStreamPlayer2D>("AttackAudio");
+		_damagedAudio = GetNodeOrNull<AudioStreamPlayer2D>("DamagedAudio");
 
 		if (PlayerNameLabel != null) PlayerNameLabel.Text = PlayerName;
 		UpdateStatsLabels();
@@ -112,6 +116,7 @@ public partial class Player : Node
 		{
 			GD.Print($"{PlayerName} ataca a {_target.MonsterName}");
 			CreateSlash(targetNode.GlobalPosition);
+			_attackAudio.Play();
 			_target.ReceiveDamage(_damage);
 			EmitSignal(nameof(PlayerAttacked));
 		}
@@ -122,14 +127,14 @@ public partial class Player : Node
 	}
 
 
-	public void levelUp()
+	public void LevelUp()
 	{
 		_maxHealth += 10;
 		_damage += 1;
 	}
 
 
-	public void heal()
+	public void Heal()
 	{
 		_currentHealth = _maxHealth;
 	}
@@ -139,6 +144,7 @@ public partial class Player : Node
 	{
 		if (Health > 0)
 		{
+			_damagedAudio.Play();
 			Health -= damage;
 		}
 	}
@@ -147,7 +153,7 @@ public partial class Player : Node
 	private void Die()
 	{
 		GD.Print($"Has muerto, {PlayerName}");
-		GetTree().Quit();
+		GetTree().ChangeSceneToFile("res://main_menu.tscn");
 	}
 
 	

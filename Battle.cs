@@ -86,8 +86,9 @@ public partial class Battle : Node2D
 	}
 	
 	
-	private void OnEnemyDied()
+	private async void OnEnemyDied()
 	{
+		await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
 		SpawnEnemy();
 	}
 	

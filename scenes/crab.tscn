@@ -122,7 +122,7 @@ script = ExtResource("1_asrw6")
 sprite_frames = SubResource("SpriteFrames_fd6js")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.662923
+frame_progress = 0.349987
 
 [node name="HealthLabel" type="Label" parent="."]
 offset_left = -25.0

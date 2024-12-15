@@ -10,7 +10,7 @@ public partial class Crab : BaseEnemy, IEnemy
 	public override void _Ready()
 	{
 		Random random = new Random();
-		Health = random.Next(14, 23);
+		Health = random.Next(12, 21);
 		Damage = random.Next(14, 23);
 		base._Ready();
 	}

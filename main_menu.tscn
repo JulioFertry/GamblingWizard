@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://deitt3yc1vfhg"]
+
+[ext_resource type="Texture2D" uid="uid://bd0ojajpmq3q2" path="res://assets/sprites/battleback5.png" id="1_ucmgo"]
+[ext_resource type="Theme" uid="uid://c04dkob2vjjiy" path="res://menu_theme.tres" id="2_ua1bh"]
+[ext_resource type="Theme" uid="uid://bshej8pr2dnkb" path="res://menu_theme2.tres" id="3_js0wn"]
+[ext_resource type="Script" path="res://StartButton.cs" id="3_sdp8r"]
+[ext_resource type="Script" path="res://ExitButton.cs" id="5_in5e7"]
+[ext_resource type="AudioStream" uid="uid://ca4a3l30vg1e6" path="res://assets/audio/LoremIpsum.wav" id="6_gt2sl"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(360, 240)
+scale = Vector2(0.652174, 0.772947)
+texture = ExtResource("1_ucmgo")
+
+[node name="Title" type="Label" parent="."]
+offset_left = 103.0
+offset_top = 35.0
+offset_right = 615.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(0.87398, 0.363707, 0.32696, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 64
+text = "Lorem Ipsum"
+
+[node name="StartButton" type="Button" parent="."]
+offset_left = 243.0
+offset_top = 178.0
+offset_right = 473.0
+offset_bottom = 240.0
+theme = ExtResource("2_ua1bh")
+theme_override_font_sizes/font_size = 30
+text = "Jugar"
+script = ExtResource("3_sdp8r")
+
+[node name="ExitButton" type="Button" parent="."]
+offset_left = 243.0
+offset_top = 270.0
+offset_right = 473.0
+offset_bottom = 332.0
+theme = ExtResource("3_js0wn")
+theme_override_font_sizes/font_size = 30
+text = "Salir"
+script = ExtResource("5_in5e7")
+
+[node name="LoremIpsum" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_gt2sl")
+autoplay = true
