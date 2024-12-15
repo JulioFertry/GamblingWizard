@@ -14,6 +14,7 @@ public partial class Battle : Node2D
 	
 	private PackedScene _slimeScene;
 	private PackedScene _spiderScene;
+	private PackedScene _crabScene;
 
 	private bool _isPlayerTurn = true;
 	
@@ -33,6 +34,7 @@ public partial class Battle : Node2D
 		
 		_slimeScene = GD.Load<PackedScene>("res://scenes/slime.tscn");
 		_spiderScene = GD.Load<PackedScene>("res://scenes/spider.tscn");
+		_crabScene = GD.Load<PackedScene>("res://scenes/crab.tscn");
 		
 		SpawnEnemy();
 	}
@@ -46,8 +48,15 @@ public partial class Battle : Node2D
 		}
 		
 		Random random = new Random();
-		int choice = random.Next(2);
-		PackedScene chosenScene = choice == 0 ? _slimeScene : _spiderScene;
+		int choice = random.Next(3);
+		PackedScene chosenScene;
+		if (choice == 0)
+			chosenScene = _slimeScene;
+		else if (choice == 1)
+			chosenScene = _spiderScene;
+		else
+			chosenScene = _crabScene;
+
 
 		Node2D enemyNode2D = chosenScene.Instantiate<Node2D>();
 		AddChild(enemyNode2D);

@@ -1,0 +1,137 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxkb1ghmdyonv"]
+
+[ext_resource type="Script" path="res://scenes/Crab.cs" id="1_asrw6"]
+[ext_resource type="Texture2D" uid="uid://dqiq7cbmixkhv" path="res://assets/sprites/enemies/!$ZodiacCancer.png" id="1_lgkv7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp4rp"]
+atlas = ExtResource("1_lgkv7")
+region = Rect2(0, 0, 100, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12oek"]
+atlas = ExtResource("1_lgkv7")
+region = Rect2(100, 0, 100, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6yv2"]
+atlas = ExtResource("1_lgkv7")
+region = Rect2(200, 0, 100, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fd6js"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp4rp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12oek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n6yv2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_12oek")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 6.0
+}]
+
+[sub_resource type="Animation" id="Animation_4kegl"]
+resource_name = "shake"
+length = 0.2
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrabSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.025, 0.05, 0.075, 0.1, 0.125, 0.15, 0.175, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(33, -18), Vector2(-23, 14), Vector2(-37, -32), Vector2(24, 11), Vector2(-9, -30), Vector2(-29, 16), Vector2(49, 6), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gsbw4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrabSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CrabSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u8v5u"]
+resource_name = "attack"
+length = 0.5
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CrabSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 50), Vector2(0, 80), Vector2(0, 90), Vector2(0, 95), Vector2(0, 95.286), Vector2(0, 95), Vector2(0, 95), Vector2(0, 63.3333), Vector2(0, 25), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CrabSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.5, 1.5), Vector2(2, 2), Vector2(2.25, 2.25), Vector2(5, 5), Vector2(2, 2), Vector2(5, 5), Vector2(2, 2), Vector2(1.66667, 1.66667), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p4oey"]
+_data = {
+"RESET": SubResource("Animation_gsbw4"),
+"attack": SubResource("Animation_u8v5u"),
+"shake": SubResource("Animation_4kegl")
+}
+
+[node name="Crab" type="Node2D"]
+script = ExtResource("1_asrw6")
+
+[node name="CrabSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_fd6js")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.662923
+
+[node name="HealthLabel" type="Label" parent="."]
+offset_left = -25.0
+offset_top = -54.0
+offset_right = 27.0
+offset_bottom = -32.0
+theme_override_font_sizes/font_size = 20
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p4oey")
+}
